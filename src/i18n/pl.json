@@ -1,0 +1,28 @@
+{
+    "Client": "Klient",
+    "Truck": "Ciężarówka",
+    "Trailer": "Przyczepa",
+    "Start Time": "Czas rozpoczęcia",
+    "End Time": "Czas zakończenia",
+    "Break Time": "Przerwa",
+    "Start KM": "KM początkowe",
+    "End KM": "KM końcowe",
+    "Total KM": "Łącznie KM",
+    "Total Hours": "Łącznie godzin",
+    "Remarks": "Uwagi",
+    "Driver Work Entry": "Wpis pracy kierowcy",
+    "Send via WhatsApp": "Wyślij przez WhatsApp",
+    "Download PDF": "Pobierz PDF",
+    "Download Excel": "Pobierz Excel",
+    "Enter client name": "Wprowadź nazwę klienta",
+    "Enter truck number": "Wprowadź numer ciężarówki",
+    "Enter trailer number": "Wprowadź numer przyczepy",
+    "Enter break time (e.g., 30 min)": "Wprowadź czas przerwy (np. 30 min)",
+    "Enter start km": "Wprowadź KM początkowe",
+    "Enter end km": "Wprowadź KM końcowe",
+    "Enter remarks": "Wprowadź uwagi",
+    "Driver Work Report": "Raport pracy kierowcy",
+    "Field": "Pole",
+    "Value": "Wartość"
+  }
+  

@@ -1,0 +1,28 @@
+{
+    "Client": "Client",
+    "Truck": "Truck",
+    "Trailer": "Trailer",
+    "Start Time": "Start Time",
+    "End Time": "End Time",
+    "Break Time": "Break Time",
+    "Start KM": "Start KM",
+    "End KM": "End KM",
+    "Total KM": "Total KM",
+    "Total Hours": "Total Hours",
+    "Remarks": "Remarks",
+    "Driver Work Entry": "Driver Work Entry",
+    "Send via WhatsApp": "Send via WhatsApp",
+    "Download PDF": "Download PDF",
+    "Download Excel": "Download Excel",
+    "Enter client name": "Enter client name",
+    "Enter truck number": "Enter truck number",
+    "Enter trailer number": "Enter trailer number",
+    "Enter break time (e.g., 30 min)": "Enter break time (e.g., 30 min)",
+    "Enter start km": "Enter start km",
+    "Enter end km": "Enter end km",
+    "Enter remarks": "Enter remarks",
+    "Driver Work Report": "Driver Work Report",
+    "Field": "Field",
+    "Value": "Value"
+  }
+  

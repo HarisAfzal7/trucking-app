@@ -1,0 +1,28 @@
+{
+    "Client": "Klant",
+    "Truck": "Vrachtwagen",
+    "Trailer": "Aanhanger",
+    "Start Time": "Starttijd",
+    "End Time": "Eindtijd",
+    "Break Time": "Pauzetijd",
+    "Start KM": "Start KM",
+    "End KM": "Eind KM",
+    "Total KM": "Totaal KM",
+    "Total Hours": "Totale uren",
+    "Remarks": "Opmerkingen",
+    "Driver Work Entry": "Chauffeurswerk Invoer",
+    "Send via WhatsApp": "Verstuur via WhatsApp",
+    "Download PDF": "Download PDF",
+    "Download Excel": "Download Excel",
+    "Enter client name": "Voer klantnaam in",
+    "Enter truck number": "Voer vrachtwagennummer in",
+    "Enter trailer number": "Voer aanhangernummer in",
+    "Enter break time (e.g., 30 min)": "Voer pauzetijd in (bijv. 30 min)",
+    "Enter start km": "Voer start km in",
+    "Enter end km": "Voer eind km in",
+    "Enter remarks": "Voer opmerkingen in",
+    "Driver Work Report": "Chauffeurswerk Rapport",
+    "Field": "Veld",
+    "Value": "Waarde"
+  }
+  

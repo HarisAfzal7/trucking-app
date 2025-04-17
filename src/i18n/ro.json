@@ -1,0 +1,28 @@
+{
+    "Client": "Client",
+    "Truck": "Camion",
+    "Trailer": "Remorcă",
+    "Start Time": "Ora de început",
+    "End Time": "Ora de sfârșit",
+    "Break Time": "Timp de pauză",
+    "Start KM": "KM început",
+    "End KM": "KM sfârșit",
+    "Total KM": "Total KM",
+    "Total Hours": "Total ore",
+    "Remarks": "Observații",
+    "Driver Work Entry": "Înregistrare muncă șofer",
+    "Send via WhatsApp": "Trimite prin WhatsApp",
+    "Download PDF": "Descarcă PDF",
+    "Download Excel": "Descarcă Excel",
+    "Enter client name": "Introduceți numele clientului",
+    "Enter truck number": "Introduceți numărul camionului",
+    "Enter trailer number": "Introduceți numărul remorcii",
+    "Enter break time (e.g., 30 min)": "Introduceți pauza (ex. 30 min)",
+    "Enter start km": "Introduceți km de început",
+    "Enter end km": "Introduceți km de sfârșit",
+    "Enter remarks": "Introduceți observații",
+    "Driver Work Report": "Raport muncă șofer",
+    "Field": "Câmp",
+    "Value": "Valoare"
+  }
+  
