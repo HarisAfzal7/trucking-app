@@ -12,7 +12,7 @@ const Form = () => {
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language');
     const savedFormData = JSON.parse(localStorage.getItem('formData'));
-    
+
     if (savedLanguage) {
       i18n.changeLanguage(savedLanguage);
     }
@@ -31,8 +31,7 @@ const Form = () => {
     endTime: '',
     startKm: '',
     endKm: '',
-    remarks: '',
-    numberToSend: '',
+    remarks: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -51,7 +50,6 @@ const Form = () => {
       setErrors((prev) => ({ ...prev, [name]: '' }));
     }
 
-    // Save form data to localStorage
     localStorage.setItem('formData', JSON.stringify(updatedFormData));
   };
 
@@ -60,8 +58,6 @@ const Form = () => {
     const updatedBreakTime = { ...formData.breakTime, [name]: value };
     const updatedFormData = { ...formData, breakTime: updatedBreakTime };
     setFormData(updatedFormData);
-    
-    // Save break time to localStorage
     localStorage.setItem('formData', JSON.stringify(updatedFormData));
   };
 
@@ -73,22 +69,29 @@ const Form = () => {
 
   const calculateTotalHours = () => {
     const { startTime, endTime, breakTime } = formData;
-    if (!startTime || !endTime) return 0;
+    if (!startTime || !endTime) return '0h 0m';
 
     const start = new Date(startTime);
     const end = new Date(endTime);
-    let diff = (end - start) / (1000 * 60 * 60); // in hours
 
-    const breakHrs = parseFloat(breakTime.hours || 0);
-    const breakMins = parseFloat(breakTime.minutes || 0);
-    diff -= (breakHrs + breakMins / 60);
+    let diffMs = end - start;
+    if (isNaN(diffMs) || diffMs <= 0) return '0h 0m';
 
-    return diff > 0 ? diff.toFixed(2) : 0;
+    const breakMs = ((parseInt(breakTime.hours || 0) * 60) + parseInt(breakTime.minutes || 0)) * 60 * 1000;
+    diffMs -= breakMs;
+
+    if (diffMs <= 0) return '0h 0m';
+
+    const totalMinutes = Math.floor(diffMs / (1000 * 60));
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+
+    return `${hours}h ${minutes}m`;
   };
 
   const handleSubmit = () => {
     const newErrors = {};
-    const requiredFields = ['client', 'truck', 'trailer', 'startTime', 'endTime', 'startKm', 'endKm', 'numberToSend'];
+    const requiredFields = ['client', 'truck', 'trailer', 'startTime', 'endTime', 'startKm', 'endKm'];
 
     requiredFields.forEach((field) => {
       if (!formData[field]) {
@@ -110,7 +113,7 @@ const Form = () => {
 
     const message = `${t('Client')}: ${formData.client}\n${t('Truck')}: ${formData.truck}\n${t('Trailer')}: ${formData.trailer}\n${t('Start Time')}: ${formData.startTime}\n${t('End Time')}: ${formData.endTime}\n${t('Break Time')}: ${formData.breakTime.hours}h ${formData.breakTime.minutes}m\n${t('Start KM')}: ${formData.startKm}\n${t('End KM')}: ${formData.endKm}\n${t('Total KM')}: ${totalKm}\n${t('Total Hours')}: ${totalHours}\n${t('Remarks')}: ${formData.remarks}`;
 
-    const whatsappUrl = `https://wa.me/${formData.numberToSend}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/+31617457310?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -166,7 +169,7 @@ const Form = () => {
       <div className="form-content">
         <h1>{t('Driver Work Entry')}</h1>
 
-        {['client', 'truck', 'trailer', 'startKm', 'endKm', 'remarks', 'numberToSend'].map((field) => (
+        {['client', 'truck', 'trailer', 'startKm', 'endKm', 'remarks'].map((field) => (
           <div className="form-group" key={field}>
             <label>
               {field === 'startKm'
@@ -241,21 +244,22 @@ const Form = () => {
           {errors.endTime && <div className="error-message">{errors.endTime}</div>}
         </div>
 
-        {/* Total Display */}
+        {/* Totals */}
         <div
           style={{
             margin: '15px 0',
             padding: '10px',
-            backgroundColor: calculateTotalKm() === 0 && calculateTotalHours() === 0 ? '#eee' : '#e0f7fa',
-            color: calculateTotalKm() === 0 && calculateTotalHours() === 0 ? '#999' : '#00796b',
+            backgroundColor: calculateTotalKm() === 0 && calculateTotalHours() === '0h 0m' ? '#eee' : '#e0f7fa',
+            color: calculateTotalKm() === 0 && calculateTotalHours() === '0h 0m' ? '#999' : '#00796b',
             borderRadius: '5px',
             textAlign: 'center',
           }}
         >
           <strong>{t('Total KM')}:</strong> {calculateTotalKm()} km &nbsp; | &nbsp;
-          <strong>{t('Total Time')}:</strong> {calculateTotalHours()} hours
+          <strong>{t('Total Time')}:</strong> {calculateTotalHours()}
         </div>
 
+        {/* Buttons */}
         <div className="button-row">
           <button className="whatsapp-btn" onClick={handleSubmit}>
             <i className="fa fa-share-alt"></i> {t('Send via WhatsApp')}
