@@ -8,18 +8,12 @@ import LanguageSwitcher from './LanguageSwitcher';
 const Form = () => {
   const { t, i18n } = useTranslation();
 
-  // Load saved data and language preference from localStorage
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language');
     const savedFormData = JSON.parse(localStorage.getItem('formData'));
 
-    if (savedLanguage) {
-      i18n.changeLanguage(savedLanguage);
-    }
-
-    if (savedFormData) {
-      setFormData(savedFormData);
-    }
+    if (savedLanguage) i18n.changeLanguage(savedLanguage);
+    if (savedFormData) setFormData(savedFormData);
   }, [i18n]);
 
   const [formData, setFormData] = useState({
@@ -39,7 +33,6 @@ const Form = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     if ((name === 'startKm' || name === 'endKm') && !/^\d*$/.test(value)) return;
 
     const updatedFormData = { ...formData, [name]: value };
@@ -61,6 +54,25 @@ const Form = () => {
     localStorage.setItem('formData', JSON.stringify(updatedFormData));
   };
 
+  const parseLocalDateTime = (dateTimeStr) => {
+    const [datePart, timePart] = dateTimeStr.split('T');
+    const [year, month, day] = datePart.split('-');
+    const [hours, minutes] = timePart.split(':');
+    return new Date(
+      parseInt(year),
+      parseInt(month) - 1,
+      parseInt(day),
+      parseInt(hours),
+      parseInt(minutes)
+    );
+  };
+
+  const isEndTimeValid = () => {
+    const start = parseLocalDateTime(formData.startTime);
+    const end = parseLocalDateTime(formData.endTime);
+    return end > start;
+  };
+
   const calculateTotalKm = () => {
     const start = parseInt(formData.startKm);
     const end = parseInt(formData.endKm);
@@ -71,9 +83,8 @@ const Form = () => {
     const { startTime, endTime, breakTime } = formData;
     if (!startTime || !endTime) return '0h 0m';
 
-    const start = new Date(startTime);
-    const end = new Date(endTime);
-
+    const start = parseLocalDateTime(startTime);
+    const end = parseLocalDateTime(endTime);
     let diffMs = end - start;
     if (isNaN(diffMs) || diffMs <= 0) return '0h 0m';
 
@@ -103,6 +114,10 @@ const Form = () => {
       newErrors.endKm = t('End KM must be greater than Start KM');
     }
 
+    if (formData.startTime && formData.endTime && !isEndTimeValid()) {
+      newErrors.endTime = t('End Time must be after Start Time');
+    }
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -118,6 +133,11 @@ const Form = () => {
   };
 
   const generatePDF = () => {
+    if (!isEndTimeValid()) {
+      setErrors((prev) => ({ ...prev, endTime: t('End Time must be after Start Time') }));
+      return;
+    }
+
     const doc = new jsPDF();
     doc.text(t('Driver Work Report'), 14, 16);
     autoTable(doc, {
@@ -140,6 +160,11 @@ const Form = () => {
   };
 
   const generateExcel = () => {
+    if (!isEndTimeValid()) {
+      setErrors((prev) => ({ ...prev, endTime: t('End Time must be after Start Time') }));
+      return;
+    }
+
     const data = [
       [t('Field'), t('Value')],
       [t('Client'), formData.client],
@@ -172,11 +197,7 @@ const Form = () => {
         {['client', 'truck', 'trailer', 'startKm', 'endKm', 'remarks'].map((field) => (
           <div className="form-group" key={field}>
             <label>
-              {field === 'startKm'
-                ? t('Start KM')
-                : field === 'endKm'
-                ? t('End KM')
-                : t(field.charAt(0).toUpperCase() + field.slice(1))}
+              {field === 'startKm' ? t('Start KM') : field === 'endKm' ? t('End KM') : t(field.charAt(0).toUpperCase() + field.slice(1))}
             </label>
             <input
               type="text"
@@ -191,7 +212,6 @@ const Form = () => {
           </div>
         ))}
 
-        {/* Break Time */}
         <div className="form-group">
           <label>{t('Break Time')}</label>
           <div className="break-time-selector">
@@ -218,7 +238,6 @@ const Form = () => {
           </div>
         </div>
 
-        {/* Start Time */}
         <div className="form-group">
           <label>{t('Start Time')}</label>
           <input
@@ -231,7 +250,6 @@ const Form = () => {
           {errors.startTime && <div className="error-message">{errors.startTime}</div>}
         </div>
 
-        {/* End Time */}
         <div className="form-group">
           <label>{t('End Time')}</label>
           <input
@@ -244,7 +262,6 @@ const Form = () => {
           {errors.endTime && <div className="error-message">{errors.endTime}</div>}
         </div>
 
-        {/* Totals */}
         <div
           style={{
             margin: '15px 0',
@@ -259,7 +276,6 @@ const Form = () => {
           <strong>{t('Total Time')}:</strong> {calculateTotalHours()}
         </div>
 
-        {/* Buttons */}
         <div className="button-row">
           <button className="whatsapp-btn" onClick={handleSubmit}>
             <i className="fa fa-share-alt"></i> {t('Send via WhatsApp')}

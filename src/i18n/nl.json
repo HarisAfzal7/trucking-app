@@ -9,14 +9,15 @@
   "End KM": "Eind KM",
   "Total KM": "Totaal KM",
   "Total Hours": "Totale Uren",
+  "Total Time": "Totale Tijd",
   "Remarks": "Opmerkingen",
   "Driver Work Entry": "Chauffeurswerk Invoer",
   "Send via WhatsApp": "Verstuur via WhatsApp",
   "Download PDF": "Download PDF",
   "Download Excel": "Download Excel",
-  "Enter client name": "Voer klantnaam in",
-  "Enter truck number": "Voer vrachtwagennummer in",
-  "Enter trailer number": "Voer aanhangwagennummer in",
+  "Enter client": "Voer klantnaam in",
+  "Enter truck": "Voer vrachtwagennummer in",
+  "Enter trailer": "Voer aanhangwagennummer in",
   "Enter break time (e.g., 30 min)": "Voer pauzetijd in (bijv. 30 min)",
   "Enter start km": "Voer start KM in",
   "Enter end km": "Voer eind KM in",
@@ -36,5 +37,6 @@
   "Start KM is required": "Start KM is verplicht",
   "End KM is required": "Eind KM is verplicht",
   "NumberToSend is required": "Telefoonnummer is verplicht",
-  "End KM must be greater than Start KM": "Eind KM moet groter zijn dan Start KM"
+  "End KM must be greater than Start KM": "Eind KM moet groter zijn dan Start KM",
+  "End Time must be after Start Time": "Eindtijd moet na starttijd zijn"
 }

@@ -9,14 +9,15 @@
   "End KM": "End KM",
   "Total KM": "Total KM",
   "Total Hours": "Total Hours",
+  "Total Time": "Total Time",
   "Remarks": "Remarks",
   "Driver Work Entry": "Driver Work Entry",
   "Send via WhatsApp": "Send via WhatsApp",
   "Download PDF": "Download PDF",
   "Download Excel": "Download Excel",
-  "Enter client name": "Enter client name",
-  "Enter truck number": "Enter truck number",
-  "Enter trailer number": "Enter trailer number",
+  "Enter client": "Enter client name",
+  "Enter truck": "Enter truck number",
+  "Enter trailer": "Enter trailer number",
   "Enter break time (e.g., 30 min)": "Enter break time (e.g., 30 min)",
   "Enter start km": "Enter start km",
   "Enter end km": "Enter end km",
@@ -36,5 +37,6 @@
   "Start KM is required": "Start KM is required",
   "End KM is required": "End KM is required",
   "NumberToSend is required": "Phone number is required",
-  "End KM must be greater than Start KM": "End KM must be greater than Start KM"
+  "End KM must be greater than Start KM": "End KM must be greater than Start KM",
+  "End Time must be after Start Time": "End Time must be after Start Time"
 }
